@@ -8,7 +8,7 @@ import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
 import {
 	logoutUser, setLoggedInUser, loginUser, registerUser, getLoggedInUser,
-	getSnacks, getSingleSnack
+	getSnacks, getSingleSnack, getSingleTopping
 } from "./data/apiManager.js";
 
 
@@ -66,10 +66,14 @@ applicationElement.addEventListener("click", event => {
 	if (event.target.id.startsWith("detailscake")) {
 		const snackId = event.target.id.split("__")[1];
 		getSingleSnack(snackId)
-			.then(response => {
-				showDetails(response);
+		.then(snackObj => {
+			getSingleTopping(snackId)
+			.then(toppingObj =>{
+				console.log(toppingObj);
+				showDetails(snackObj, toppingObj);
 			})
 	}
+)}
 })
 
 applicationElement.addEventListener("click", event => {
@@ -79,11 +83,12 @@ applicationElement.addEventListener("click", event => {
 	}
 })
 
-const showDetails = (snackObj) => {
+const showDetails = (snackObj, toppingObj) => {
 	const listElement = document.querySelector("#mainContent");
-	listElement.innerHTML = SnackDetails(snackObj);
+	listElement.innerHTML = SnackDetails(snackObj, toppingObj);
 }
 //end snack listeners
+
 
 const checkForUser = () => {
 	if (sessionStorage.getItem("user")) {
@@ -126,4 +131,4 @@ const startLDSnacks = () => {
 
 }
 
-checkForUser();
+checkForUser()
