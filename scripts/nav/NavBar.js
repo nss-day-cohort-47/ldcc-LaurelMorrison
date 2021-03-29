@@ -1,21 +1,12 @@
-import { getLoggedInUser } from "../data/apiManager.js"
-
-import { useSnackToppingsCollection, getSnackToppings } from "../data/apiManager.js"
+import { getLoggedInUser, useSnackToppingsCollection, getSnackToppings } from "../data/apiManager.js"
 
 
-
-
-export const renderToppings = (allToppings) => {
-
-	const toppingTarget = document.querySelector(".toppingDropdown")
-
-	let toppingOptions = allToppings.map(singleTopping => {
+export const renderToppings = () => {
+	const toppingList = useSnackToppingsCollection();
+	let toppingOptions = toppingList.map(singleTopping => {
 		return `<option value="${singleTopping.id}">${singleTopping.name}</option>`
 	})
-
-	toppingTarget.innerHTML = `
-	<select id="toppingDropdown" class = "btn-info toppingDropdown"><option value=0>Select A Topping</option>${toppingOptions}</select>
-	`
+	return toppingOptions
 }
 
 export const populateToppings = () => {
@@ -25,19 +16,6 @@ export const populateToppings = () => {
 			renderToppings(selectTopping);
 		})
 }
-
-// export const toppingsListener = () => {
-	
-// 	applicationElement.addEventListener("change", event => {
-// 		event.preventDefault()
-// 		const toppingTarget = document.querySelector("#dropdown")
-// 		let toppings = useSnackToppingsCollection()
-// 		for (let snack of toppings){
-// 		if (event.target.value === snack.type.name ) {
-// 			showSnackList(snack);
-// 		}
-// 	}
-// }
 
 
 export const NavBar = () => {
@@ -54,7 +32,7 @@ export const NavBar = () => {
 		</li>
 		<li class="nav-item ms-1">
 			<div class ="toppingDropdown btn btn-info" aria-label="Select A Topping">
-				
+			<select id="toppingDropdown" class ="btn-info toppingDropdown"><option value=0>Select A Topping</option>${renderToppings()}</select>
 			</div>
 		</li>
 		<li class="nav-item ms-1">
@@ -71,15 +49,28 @@ export const NavBar = () => {
 		</div>
 	</nav>` : ""
 
-	return `
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		<div class="container-fluid">
-		  <span class="navbar-brand mb-0 h1">LDCC
-		  	<span class="navbar-text">Little Debbie Collector Club</span>
-		  </span>
-		${navItems}
-  		</div>
-	</nav>
-	${addTypeButton}
-	`
+	if(getLoggedInUser().admin === true) {
+		console.log(getLoggedInUser)
+		return `
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			  <div class="container-fluid">
+			  <span class="navbar-brand mb-0 h1">LDCC
+				  <span class="navbar-text">Little Debbie Collector Club</span>
+			  </span>
+			${navItems}
+			  </div>
+		</nav>
+		${addTypeButton}
+		`
+	} else {
+		return `
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			  <div class="container-fluid">
+			  <span class="navbar-brand mb-0 h1">LDCC
+				  <span class="navbar-text">Little Debbie Collector Club</span>
+			  </span>
+			${navItems}
+			  </div>
+		</nav>`
+	}
 }

@@ -7,9 +7,11 @@ import { populateToppings, renderToppings } from "./nav/NavBar.js";
 import { SnackList } from "./snacks/SnackList.js";
 import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
+import { addType } from "./snacks/type.js";
 import {
 	logoutUser, setLoggedInUser, loginUser, registerUser, getLoggedInUser,
-	getSnacks, getSingleSnack, getSnackByTopping, getSnackToppings, useSnackToppingsCollection
+	getSnacks, getSingleSnack, getSnackByTopping, getSnackToppings, useSnackToppingsCollection,
+	registerType
 } from "./data/apiManager.js";
 
 
@@ -80,12 +82,6 @@ applicationElement.addEventListener("click", event => {
 	}
 })
 
-// applicationElement.addEventListener("click", event => {
-// 	event.preventDefault();
-// 	if(event.target.id === "dropdown"){
-
-// 	}
-// })
 
 const showDetails = (snackObj) => {
 	const listElement = document.querySelector("#mainContent");
@@ -111,11 +107,7 @@ const showLoginRegister = () => {
 }
 
 const showNavBar = () => {
-	const toppingList = useSnackToppingsCollection();
-	console.log(toppingList)
-	
 	applicationElement.innerHTML += NavBar();
-	renderToppings(toppingList);
 }
 
 const showSnackList = () => {
@@ -141,17 +133,56 @@ applicationElement.addEventListener("change", event => {
 	}
 })
 
+//adding a type
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "addType") {
+		applicationElement.innerHTML = "";
+		showNavBar();
+		showTypeForm();
+	}
+})
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "typeSubmit") {
+		const typeObj = {
+			name: document.querySelector("#typeName").value
+		}
+		registerType(typeObj)
+		startLDSnacks();
+	}
+	
+})
+
+const cancelType = () => {
+	const cancelElement = document.querySelector(".container");
+	cancelElement.innerHTML = startLDSnacks();
+}
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "formCancel") {
+		cancelType();
+	}
+})
+
+const showTypeForm = () => {
+	applicationElement.innerHTML += `${addType()}`;
+}
+
+//show footer
 const showFooter = () => {
 	applicationElement.innerHTML += Footer();
 }
 
 const startLDSnacks = () => {
-	applicationElement.innerHTML = "";
-	showNavBar()
-	applicationElement.innerHTML += `<div id="mainContent"></div>`;
-	showSnackList();
-	showFooter();
-	populateToppings();
+	getSnackToppings()
+	.then(() => {
+		applicationElement.innerHTML = "";
+		showNavBar()
+		applicationElement.innerHTML += `<div id="mainContent"></div>`;
+		showSnackList();
+		showFooter();
+		populateToppings();
+	})
 	
 }
 

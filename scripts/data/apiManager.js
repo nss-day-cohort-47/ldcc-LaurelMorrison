@@ -1,7 +1,7 @@
 const apiURL = "http://localhost:8088";
 
-//// user functions
-let loggedInUser = {}
+// user functions
+let loggedInUser = {};
 
 export const getLoggedInUser = () => {
 	return { ...loggedInUser };
@@ -24,7 +24,6 @@ export const loginUser = (userObj) => {
 				setLoggedInUser(parsedUser[0]);
 				return getLoggedInUser();
 			} else {
-				//no user
 				return false;
 			}
 		})
@@ -46,7 +45,7 @@ export const registerUser = (userObj) => {
 }
 
 
-///// snack functions
+/// snack functions
 
 let snackCollection = [];
 
@@ -111,4 +110,30 @@ export const getSnackToppings = () => {
 export const getSnackByTopping = (toppingId) => {
 	return fetch(`${apiURL}/snackToppings?toppingId=${toppingId}&_expand=snack`)
 	.then(response => response.json())
+}
+
+/// adding type
+let addedType = {};
+
+export const getAddedType = () => {
+	return {...addedType};
+}
+
+export const setAddedType = (typeObj) => {
+	addedType = typeObj;
+}
+
+export const registerType = (typeObj) => {
+	return fetch(`${apiURL}/types`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(typeObj)
+	})
+	.then(response => response.json())
+	.then(parsedType => {
+		setAddedType(parsedType);
+		return getAddedType();
+	})
 }
