@@ -11,15 +11,11 @@ export const renderToppings = (allToppings) => {
 
 	let toppingOptions = allToppings.map(singleTopping => {
 		return `<option value="${singleTopping.id}">${singleTopping.name}</option>`
-
 	})
 
 	toppingTarget.innerHTML = `
-		<select class = "toppingDropdown">${toppingOptions}</select>
-		
-		
-		`
-
+	<select id="toppingDropdown" class = "btn-info toppingDropdown"><option value=0>Select A Topping</option>${toppingOptions}</select>
+	`
 }
 
 export const populateToppings = () => {
@@ -57,7 +53,7 @@ export const NavBar = () => {
 			<button class="btn btn-info" type="button" id="allSnacks">All Snacks</button>
 		</li>
 		<li class="nav-item ms-1">
-			<div class ="toppingDropdown"  aria-label="Select A Topping">
+			<div class ="toppingDropdown btn btn-info" aria-label="Select A Topping">
 				
 			</div>
 		</li>

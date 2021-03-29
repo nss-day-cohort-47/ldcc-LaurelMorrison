@@ -90,7 +90,7 @@ export const getToppings = (snackId) => {
 	
 }
 
-
+// adding in toppings
 let toppingsCollection = [];
 
 export const useSnackToppingsCollection = () => {
@@ -106,3 +106,9 @@ export const getSnackToppings = () => {
 	toppingsCollection = parsedResponse
 	return parsedResponse;
 })}
+
+
+export const getSnackByTopping = (toppingId) => {
+	return fetch(`${apiURL}/snackToppings?toppingId=${toppingId}&_expand=snack`)
+	.then(response => response.json())
+}
