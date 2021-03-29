@@ -43,6 +43,7 @@ export const registerUser = (userObj) => {
 			setLoggedInUser(parsedUser);
 			return getLoggedInUser();
 		})
+
 }
 
 
@@ -69,5 +70,22 @@ export const getSnacks = () => {
 
 export const getSingleSnack = (snackId) => {
 	return fetch(`${apiURL}/snacks/${snackId}?_expand=type&_expand=inFlavor&_expand=season&_expand=shape`)
+		.then(response => response.json())
+	// .then(parsedResponse.id).then(ToppingCollection => {
+	// 	parsedResponse.ToppingCollection = ToppingCollection	
+	// 	return parsedResponse})
+}
+
+
+// export const getSnackToppings = (snackId) => {
+// 	return fetch(`${apiURL}/snackToppings=${snackId}&_expand=topping&_expand=snack`)
+// 		.then(response => response.json())
+// 		.then(response => {
+// 			return toppingsFunction(response);
+// 		})
+// }
+
+export const getSingleTopping = (snackId) => {
+	return fetch(`${apiURL}/snackToppings?snackID=${snackId}?&_expand=topping&_expand=snack`)
 	.then(response => response.json())
 }
