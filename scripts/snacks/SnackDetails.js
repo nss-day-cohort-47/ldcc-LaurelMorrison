@@ -1,5 +1,4 @@
-export const SnackDetails = (snackObject, toppingObject) => {
-	console.log(toppingObject)
+export const SnackDetails = (snackObject) => {
 	return `
 	<div class="col">
 		<div class="card shadow-sm" >
@@ -16,7 +15,9 @@ export const SnackDetails = (snackObject, toppingObject) => {
 						<div class="col col-details">Season: ${snackObject.season.name}</div>
 					</div>
 					<div class="row row-cols-1">
-					<div class="col col-details">Toppings: ${toppingObject.map(topping => {return topping.topping.name}).join(", ")}</div>
+						<p class="col col-details">Toppings: ${snackObject.toppings.map(topping => 
+							topping.topping.name).join (", ")}</p>
+							 
 					</div>
 				</div>
 			  	
