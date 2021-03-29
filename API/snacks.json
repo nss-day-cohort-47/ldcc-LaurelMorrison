@@ -131,6 +131,18 @@
       "seasonId": 1,
       "description": "Strawberry-flavored cake with layered creme, coated in white frosting with light blue stripes and purple candy glitter.",
       "toppings": "White icing with light blue stripes and purple glitter."
+    },
+    {
+      "id": 12,
+      "name": "Oatmeal Creme Pies Cereal",
+      "snackImg": "https://d2d8wwwkmhfcva.cloudfront.net/400x/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_39366d86-8c75-4d1f-9643-6e3417e9dc1f.jpg",
+      "count": 3,
+      "typeId": 6,
+      "shapeId": 4,
+      "inFlavorId": 1,
+      "seasonId": 1,
+      "description": "Bursting with oatmeal-flavored deliciousness. Sweet, delicious and a great way to celebrate life’s little moments; enjoy a bowl with your favorite milk.",
+      "toppings": "Milk"
     }
   ],
   "toppings": [
@@ -197,6 +209,10 @@
     {
       "id": 16,
       "name": "Purple Glitter"
+    },
+    {
+      "id": 17,
+      "name": "Milk"
     }
   ],
   "snackToppings": [
@@ -299,12 +315,17 @@
       "id": 20,
       "snackId": 11,
       "toppingId": 16
+    },
+    {
+      "id": 21,
+      "snackId": 12,
+      "toppingId": 17
     }
   ],
   "inFlavors": [
     {
       "id": 1,
-      "name": "none"
+      "name": "None"
     },
     {
       "id": 2,
@@ -397,6 +418,10 @@
     {
       "id": 5,
       "name": "Cordial"
+    },
+    {
+      "id": 6,
+      "name": "Cereal"
     }
   ],
   "shapes": [
