@@ -9,10 +9,11 @@ import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
 import { addType } from "./snacks/type.js";
 import { addTopping } from "./snacks/topping.js";
+import { addToppingEdit } from "./snacks/toppingEdit.js";
 import {
-	logoutUser, setLoggedInUser, loginUser, registerUser, getLoggedInUser,
-	getSnacks, getSingleSnack, getSnackByTopping, getSnackToppings, useSnackToppingsCollection,
-	registerType, registerTopping
+	logoutUser, setLoggedInUser, loginUser, registerUser, 
+	getSnacks, getSingleSnack, getSnackByTopping, getSnackToppings, 
+	registerType, registerTopping, updateTopping
 } from "./data/apiManager.js";
 
 
@@ -137,7 +138,6 @@ applicationElement.addEventListener("change", event => {
 //adding a type
 applicationElement.addEventListener("click", event => {
 	if(event.target.id === "addType") {
-		console.log("button pushed")
 		applicationElement.innerHTML = "";
 		showNavBar();
 		showTypeForm();
@@ -192,6 +192,65 @@ applicationElement.addEventListener("click", event => {
 
 const showToppingForm = () => {
 	applicationElement.innerHTML += `${addTopping()}`;
+}
+//Editting toppings
+
+// applicationElement.addEventListener("change", event => {
+// 	event.preventDefault();
+// 	if (event.target.id === "toppingEditDropdown") {
+// 		let snackEditSelector = event.target.value
+// 		getSnackByTopping(snackEditSelector)
+// 		.then(response => {
+// 			let selectedEditToppingArray = [];
+// 			response.forEach(topping => {
+// 				selectedEditToppingArray.push(topping.snack)
+// 			})
+// 			const listElement = document.querySelector("#mainContent")
+// 			listElement.innerHTML = SnackList(selectedToppingArray)
+// 		})
+// 	}
+// })
+
+applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id.startsWith("editSubmit")) {
+	  const toppingId = event.target.id.split("__")[1];
+	  //collect all the details into an object
+	  const name = document.querySelector("input[name='toppingEditName']").value
+
+	  const toppingObject = {
+		name: name,
+		id: parseInt(toppingId)
+	  }
+	  
+	  updateTopping(toppingObject)
+		.then(response => {
+			showSnackList();
+		})
+	}
+  })
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "toppingEdit") {
+		applicationElement.innerHTML = "";
+		showNavBar();
+		showToppingEditForm();
+	}
+})
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "editSubmit") {
+		const toppingObj = {
+			name: document.querySelector("#toppingName").value
+		}
+		registerTopping(toppingObj)
+		startLDSnacks();
+	}
+	
+})
+
+const showToppingEditForm = () => {
+	applicationElement.innerHTML += `${addToppingEdit()}`;
 }
 
 //show footer

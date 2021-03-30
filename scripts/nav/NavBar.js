@@ -1,12 +1,11 @@
 import { getLoggedInUser, useSnackToppingsCollection, getSnackToppings } from "../data/apiManager.js"
-import { addType } from "../snacks/type.js";
 
 export const renderToppings = () => {
 	const toppingList = useSnackToppingsCollection();
 	let toppingOptions = toppingList.map(singleTopping => {
 		return `<option value="${singleTopping.id}">${singleTopping.name}</option>`
 	})
-	return toppingOptions
+	return toppingOptions.join
 }
 
 export const populateToppings = () => {
@@ -16,7 +15,6 @@ export const populateToppings = () => {
 			renderToppings(selectTopping);
 		})
 }
-
 
 export const NavBar = () => {
 	//only show navItems and addTypeButton if user is logged in
