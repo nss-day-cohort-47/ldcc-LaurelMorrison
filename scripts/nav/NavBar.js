@@ -1,12 +1,11 @@
 import { getLoggedInUser, useSnackToppingsCollection, getSnackToppings } from "../data/apiManager.js"
-import { addType } from "../snacks/type.js";
 
 export const renderToppings = () => {
 	const toppingList = useSnackToppingsCollection();
 	let toppingOptions = toppingList.map(singleTopping => {
 		return `<option value="${singleTopping.id}">${singleTopping.name}</option>`
 	})
-	return toppingOptions
+	return toppingOptions.join
 }
 
 export const populateToppings = () => {
@@ -16,7 +15,6 @@ export const populateToppings = () => {
 			renderToppings(selectTopping);
 		})
 }
-
 
 export const NavBar = () => {
 	//only show navItems and addTypeButton if user is logged in
@@ -41,7 +39,7 @@ export const NavBar = () => {
 	</ul>
 	</div>` : ""
 
-	const addTypeButton = getLoggedInUser().id ? `
+	const TypeButton = getLoggedInUser().id ? `
 	<nav class="navbar navbar-light"">
 		<div class="container-fluid">
 			<button id="addType"class="btn btn-outline-primary" type="button">Add A Type</button>
@@ -49,10 +47,18 @@ export const NavBar = () => {
 		</div>
 	</nav>` : ""
 
-	const addToppingButton = getLoggedInUser().id ? `
+	const ToppingButton = getLoggedInUser().id ? `
 	<nav class="navbar navbar-light"">
 		<div class="container-fluid">
 			<button id="addTopping"class="btn btn-outline-primary" type="button">Add A Topping</button>
+		
+		</div>
+	</nav>` : ""
+
+	const SnackButton = getLoggedInUser().id ? `
+	<nav class="navbar navbar-light"">
+		<div class="container-fluid">
+			<button id="addSnack"class="btn btn-outline-primary" type="button">Add A Snack</button>
 		
 		</div>
 	</nav>` : ""
@@ -67,8 +73,9 @@ export const NavBar = () => {
 			${navItems}
 			  </div>
 		</nav><div class="buttonHeaders">
-		${addTypeButton}
-		${addToppingButton}
+		${TypeButton}
+		${ToppingButton}
+		${SnackButton}
 		</div>
 		`
 	} else {

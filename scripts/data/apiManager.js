@@ -115,11 +115,11 @@ export const getSnackByTopping = (toppingId) => {
 /// adding type
 let addedType = {};
 
-export const getAddedType = () => {
+export const addType = () => {
 	return {...addedType};
 }
 
-export const setAddedType = (typeObj) => {
+export const getAddType = (typeObj) => {
 	addedType = typeObj;
 }
 
@@ -133,19 +133,19 @@ export const registerType = (typeObj) => {
 	})
 	.then(response => response.json())
 	.then(parsedType => {
-		setAddedType(parsedType);
-		return getAddedType();
+		getAddType(parsedType);
+		return addType();
 	})
 }
 
 /// adding topping
 let addedTopping = {};
 
-export const getAddedTopping = () => {
+export const addTopping = () => {
 	return {...addedTopping};
 }
 
-export const setAddedTopping = (toppingObj) => {
+export const setAddTopping = (toppingObj) => {
 	addedTopping = toppingObj;
 }
 
@@ -159,7 +159,28 @@ export const registerTopping = (toppingObj) => {
 	})
 	.then(response => response.json())
 	.then(parsedType => {
-		setAddedTopping(parsedType);
-		return getAddedTopping();
+		setAddTopping(parsedType);
+		return addTopping();
 	})
 }
+
+/// adding topping
+export const getToppingOption = (toppingId) => {
+	return fetch(`${apiURL}/toppings/${toppingId}`)
+	  .then(response => response.json())
+  }
+  
+
+  export const updateTopping = toppingObj => {
+	return fetch(`${apiURL}/toppings/${toppingObj.id}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(toppingObj)
+  
+	})
+		.then(response => response.json())
+		.then(getToppingOption)
+  }
+
