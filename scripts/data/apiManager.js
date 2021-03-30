@@ -137,3 +137,29 @@ export const registerType = (typeObj) => {
 		return getAddedType();
 	})
 }
+
+/// adding topping
+let addedTopping = {};
+
+export const getAddedTopping = () => {
+	return {...addedTopping};
+}
+
+export const setAddedTopping = (toppingObj) => {
+	addedTopping = toppingObj;
+}
+
+export const registerTopping = (toppingObj) => {
+	return fetch(`${apiURL}/toppings`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(toppingObj)
+	})
+	.then(response => response.json())
+	.then(parsedType => {
+		setAddedTopping(parsedType);
+		return getAddedTopping();
+	})
+}

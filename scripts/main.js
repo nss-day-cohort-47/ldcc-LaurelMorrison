@@ -8,10 +8,11 @@ import { SnackList } from "./snacks/SnackList.js";
 import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
 import { addType } from "./snacks/type.js";
+import { addTopping } from "./snacks/topping.js";
 import {
 	logoutUser, setLoggedInUser, loginUser, registerUser, getLoggedInUser,
 	getSnacks, getSingleSnack, getSnackByTopping, getSnackToppings, useSnackToppingsCollection,
-	registerType
+	registerType, registerTopping
 } from "./data/apiManager.js";
 
 
@@ -168,6 +169,29 @@ applicationElement.addEventListener("click", event => {
 const showTypeForm = () => {
 	applicationElement.innerHTML += `${addType()}`;
 	console.log(addType())
+}
+//adding a topping
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "addTopping") {
+		applicationElement.innerHTML = "";
+		showNavBar();
+		showToppingForm();
+	}
+})
+
+applicationElement.addEventListener("click", event => {
+	if(event.target.id === "toppingSubmit") {
+		const toppingObj = {
+			name: document.querySelector("#toppingName").value
+		}
+		registerTopping(toppingObj)
+		startLDSnacks();
+	}
+	
+})
+
+const showToppingForm = () => {
+	applicationElement.innerHTML += `${addTopping()}`;
 }
 
 //show footer
