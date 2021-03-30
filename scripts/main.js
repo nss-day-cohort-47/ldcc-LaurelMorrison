@@ -225,7 +225,7 @@ applicationElement.addEventListener("click", event => {
 	  
 	  updateTopping(toppingObject)
 		.then(response => {
-			showSnackList();
+			showSnackList(response);
 		})
 	}
   })
