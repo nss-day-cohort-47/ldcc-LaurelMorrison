@@ -137,6 +137,7 @@ applicationElement.addEventListener("change", event => {
 //adding a type
 applicationElement.addEventListener("click", event => {
 	if(event.target.id === "addType") {
+		console.log("button pushed")
 		applicationElement.innerHTML = "";
 		showNavBar();
 		showTypeForm();
@@ -167,6 +168,7 @@ applicationElement.addEventListener("click", event => {
 
 const showTypeForm = () => {
 	applicationElement.innerHTML += `${addType()}`;
+	console.log(addType())
 }
 //adding a topping
 applicationElement.addEventListener("click", event => {
@@ -201,7 +203,7 @@ const startLDSnacks = () => {
 	getSnackToppings()
 	.then(() => {
 		applicationElement.innerHTML = "";
-		showNavBar()
+		showNavBar();
 		applicationElement.innerHTML += `<div id="mainContent"></div>`;
 		showSnackList();
 		showFooter();
@@ -211,5 +213,3 @@ const startLDSnacks = () => {
 }
 
 checkForUser();
-// toppingsListener();
-// populateToppings();
