@@ -213,6 +213,10 @@
     {
       "id": 17,
       "name": "Milk"
+    },
+    {
+      "name": "chocolate sprinkles",
+      "id": 18
     }
   ],
   "snackToppings": [

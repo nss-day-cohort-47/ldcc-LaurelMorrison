@@ -8,11 +8,11 @@ import { SnackList } from "./snacks/SnackList.js";
 import { SnackDetails } from "./snacks/SnackDetails.js";
 import { Footer } from "./nav/Footer.js";
 import { addType } from "./snacks/type.js";
-import { addTopping } from "./snack/topping.js";
+import { addTopping } from "./snacks/topping.js";
 import {
 	logoutUser, setLoggedInUser, loginUser, registerUser, getLoggedInUser,
 	getSnacks, getSingleSnack, getSnackByTopping, getSnackToppings, useSnackToppingsCollection,
-	registerType
+	registerType, registerTopping
 } from "./data/apiManager.js";
 
 
