@@ -90,7 +90,7 @@ export const getToppings = (snackId) => {
 }
 
 // adding in toppings
-let toppingsCollection = [];
+let toppingsCollection = {};
 
 export const useSnackToppingsCollection = () => {
 	const toppingsCollectionCopy = [...toppingsCollection]

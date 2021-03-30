@@ -1,5 +1,5 @@
 import { getLoggedInUser, useSnackToppingsCollection, getSnackToppings } from "../data/apiManager.js"
-
+import { addType } from "../snacks/type.js";
 
 export const renderToppings = () => {
 	const toppingList = useSnackToppingsCollection();
@@ -44,13 +44,12 @@ export const NavBar = () => {
 	const addTypeButton = getLoggedInUser().id ? `
 	<nav class="navbar navbar-light"">
 		<div class="container-fluid">
-			<button class="btn btn-outline-primary" type="button">Add A Type</button>
+			<button id="addType"class="btn btn-outline-primary" type="button">Add A Type</button>
 		
 		</div>
 	</nav>` : ""
 
 	if(getLoggedInUser().admin === true) {
-		console.log(getLoggedInUser)
 		return `
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			  <div class="container-fluid">
